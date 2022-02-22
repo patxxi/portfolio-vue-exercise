@@ -46,14 +46,25 @@
       label="Fecha de Nacimiento"
     />
 
-    <v-btn
-      elevation="2"
-      large
-      color="primary"
-      @click="handleSubmit"
-    >
-      Submit
-    </v-btn>
+    <v-row>
+      <v-btn
+        elevation="2"
+        large
+        color="#08a30d"
+        @click="handleSubmit"
+      >
+        Registrarse
+      </v-btn>
+
+      <v-btn
+        elevation="2"
+        large
+        color="#0320fc"
+        @click="handleLogin"
+      >
+        Iniciar Sesion
+      </v-btn>
+    </v-row>
   </v-form>
 </template>
 
@@ -89,8 +100,15 @@
           formData.append(key, form[key])
         })
 
-        const { data } = await postSignup(formData)
+        const { data, request } = await postSignup(formData)
         console.log(data)
+        if (request.ok) {
+          this.$router.push({ path: '/user/login' })
+        }
+      },
+
+      handleLogin () {
+        this.$router.push({ path: '/user/login' })
       },
     },
   }
@@ -106,6 +124,7 @@
 }
 
 .v-btn {
-    margin: 10px 0px;
+    margin: 10px;
+    color: white;
 }
 </style>

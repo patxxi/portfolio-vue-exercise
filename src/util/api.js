@@ -19,4 +19,28 @@ const postSignup = async (body) => {
     }
 }
 
-export { postSignup }
+const postLogin = async (body) => {
+    const url = BASE_URL + 'auth/login'
+
+    console.log(body)
+    try {
+        const request = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+
+        const data = await request.json()
+
+        console.log('data', data)
+        console.log('request', request)
+
+        return { data, request }
+    } catch (e) {
+        return e
+    }
+}
+
+export { postSignup, postLogin }
