@@ -43,4 +43,46 @@ const postLogin = async (body) => {
     }
 }
 
-export { postSignup, postLogin }
+const getMe = async (token) => {
+    const url = BASE_URL + 'auth/me'
+
+    try {
+        const request = await fetch(url, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        })
+
+        const data = await request.json()
+
+        return { data, request }
+    } catch (e) {
+        return e
+    }
+}
+
+const updateMe = async ({ token, body }) => {
+    const url = BASE_URL + 'auth/update'
+    try {
+        const request = await fetch(url, {
+            method: 'POST',
+            body: body,
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+
+        const data = await request.json()
+
+        console.log('data', data)
+        console.log('request', request)
+
+        return { data, request }
+    } catch (e) {
+        return e
+    }
+}
+
+export { postSignup, postLogin, getMe, updateMe }

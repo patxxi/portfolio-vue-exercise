@@ -24,7 +24,7 @@ const router = new Router({
       route('Dashboard', null, '/'),
 
       // Pages
-      route('UserProfile', null, 'components/profile'),
+      route('UserProfile', null, 'user/profile'),
       route('Signup', null, 'user/signup'),
       route('Login', null, 'user/login'),
 
