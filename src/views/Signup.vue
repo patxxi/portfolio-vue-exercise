@@ -46,6 +46,12 @@
       label="Fecha de Nacimiento"
     />
 
+    <v-text-field
+      v-model="is_admin"
+      label="Admin"
+      type="number"
+    />
+
     <v-row>
       <v-btn
         elevation="2"
@@ -86,6 +92,7 @@
         password: '',
         repeat_password: '',
         identification_card: '',
+        is_admin: 1,
       }
     },
     methods: {

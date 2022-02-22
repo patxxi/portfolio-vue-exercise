@@ -134,15 +134,17 @@
 
   export default {
     name: 'UserProfileView',
+    inject: ['user', 'admin'],
     data () {
       return {
-        user: {},
+        user: this.user,
       }
     },
 
     async beforeMount () {
-      const { data } = await getMe(token)
-      this.$data.user = data
+      this.$data.user = this.$data.user.value.data
+      console.log(this.user)
+      console.log(this.admin)
     },
 
     methods: {
