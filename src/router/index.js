@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import { trailingSlash } from '@/util/helpers'
+import { getLocalStorage } from '@/util/localstorage'
 import {
   layout,
   route,
@@ -20,7 +21,7 @@ const router = new Router({
   },
   routes: [
     layout('Default', [
-      route('Dashboard'),
+      route('Dashboard', null, '/'),
 
       // Pages
       route('UserProfile', null, 'components/profile'),
@@ -42,6 +43,13 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  const token = getLocalStorage()
+  if (to.name !== 'Login' && to.name !== 'Signup') {
+    if (!token) {
+      return { name: 'Login' }
+    }
+  }
+
   return to.path.endsWith('/') ? next() : next(trailingSlash(to.path))
 })
 

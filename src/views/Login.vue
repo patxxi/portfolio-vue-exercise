@@ -37,6 +37,7 @@
 
 <script>
   import { postLogin } from '../util/api'
+  import { saveLocalStorage } from '../util/localstorage'
   export default {
     name: 'Login',
     data () {
@@ -53,6 +54,7 @@
         const { data, request } = await postLogin(form)
 
         if (request.ok) {
+          saveLocalStorage(data.access_token)
           this.$router.push({ path: '/' })
         }
       },
