@@ -27,6 +27,7 @@ const router = new Router({
       route('UserProfile', null, 'user/profile'),
       route('Signup', null, 'user/signup'),
       route('Login', null, 'user/login'),
+      route('Admin', null, 'admin'),
 
       // Components
       route('Notifications', null, 'components/notifications'),

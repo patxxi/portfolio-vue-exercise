@@ -20,7 +20,7 @@ const state = {
     {
       title: 'Admin',
       icon: 'mdi-clipboard-outline',
-      to: '/tables/regular/',
+      to: '/admin/',
     },
   ],
 }

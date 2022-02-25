@@ -84,4 +84,19 @@ const updateMe = async ({ token, body }) => {
     }
 }
 
-export { postSignup, postLogin, getMe, updateMe }
+const getAllUsers = async (token) => {
+    const url = BASE_URL + 'auth/list'
+
+    try {
+        const request = await fetch(url)
+        const data = await request.json()
+
+        console.log(request)
+        console.log(data)
+        return { data, request }
+    } catch (e) {
+        return e
+    }
+}
+
+export { postSignup, postLogin, getMe, updateMe, getAllUsers }
