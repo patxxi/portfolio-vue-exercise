@@ -36,7 +36,7 @@
 </template>
 
 <script>
-  import { postLogin } from '../util/api'
+  import { postLogin, getMe } from '../util/api'
   import { saveLocalStorage } from '../util/localstorage'
   export default {
     name: 'Login',
@@ -54,7 +54,12 @@
         const { data, request } = await postLogin(form)
 
         if (request.ok) {
+          const token = data.access_token
           saveLocalStorage({ key: 'token', value: data.access_token })
+          const request = await getMe(token)
+          const user = request.data
+          console.log(user)
+          saveLocalStorage({ key: 'is_admin', value: user.is_admin })
           this.$router.push({ path: '/' })
         }
       },

@@ -1,12 +1,10 @@
 // Pathify
 import { make } from 'vuex-pathify'
 
+// util
+
 // Data
-const state = {
-  drawer: null,
-  drawerImage: true,
-  mini: false,
-  items: [
+const items = [
     {
       title: 'Dashboard',
       icon: 'mdi-view-dashboard',
@@ -22,7 +20,13 @@ const state = {
       icon: 'mdi-clipboard-outline',
       to: '/admin/',
     },
-  ],
+  ]
+
+const state = {
+  drawer: null,
+  drawerImage: true,
+  mini: false,
+  items,
 }
 
 const mutations = make.mutations(state)

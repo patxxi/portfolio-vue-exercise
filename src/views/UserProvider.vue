@@ -6,7 +6,7 @@
 
 <script>
   import { getMe } from '@/util/api'
-  import { getLocalStorage } from '@/util/localstorage'
+  import { getLocalStorage, saveLocalStorage } from '@/util/localstorage'
 
   const token = getLocalStorage('token')
 
@@ -29,6 +29,8 @@
       if (token) {
         this.user.value = { ...await getMe(token) }
         this.admin.value = this.user.value.data.is_admin
+
+        saveLocalStorage({ key: 'is_admin', value: this.admin.value })
       }
     },
   }

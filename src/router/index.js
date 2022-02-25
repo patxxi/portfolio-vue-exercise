@@ -45,11 +45,18 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   const token = getLocalStorage('token')
+  const admin = parseInt(getLocalStorage('is_admin'))
+  console.log('admin', admin)
   if (to.name !== 'Login' && to.name !== 'Signup') {
    if (!token) {
      console.log('Entre')
       return { name: 'Login' }
     }
+  }
+
+  if (to.name === 'Admin' && !admin) {
+    console.log('entre 2')
+    return '/'
   }
 
   return to.path.endsWith('/') ? next() : next(trailingSlash(to.path))

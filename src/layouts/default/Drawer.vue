@@ -24,35 +24,11 @@
     <div class="px-2">
       <v-divider class="mx-3 mb-2" />
 
-      <default-list :items="items" />
+      <default-list
+        key="is_admin"
+        :items="items"
+      />
     </div>
-
-    <template #append>
-      <div class="pa-4 text-center">
-        <app-btn
-          class="text-none mb-4"
-          color="white"
-          href="https://vuetifyjs.com"
-          small
-          text
-        >
-          Documentation
-        </app-btn>
-
-        <app-btn
-          block
-          class="text-none"
-          color="secondary"
-          href="https://store.vuetifyjs.com/products/vuetify-material-dashboard-pro"
-        >
-          <v-icon left>
-            mdi-package-up
-          </v-icon>
-
-          Upgrade to Pro
-        </app-btn>
-      </div>
-    </template>
 
     <div class="pt-12" />
   </v-navigation-drawer>
@@ -64,12 +40,19 @@
 
   export default {
     name: 'DefaultDrawer',
+    inject: ['admin'],
 
     components: {
       DefaultList: () => import(
         /* webpackChunkName: "default-list" */
         './List'
       ),
+    },
+
+    data () {
+      return {
+        is_admin: this.admin,
+      }
     },
 
     computed: {

@@ -128,23 +128,23 @@
 </template>
 
 <script>
-  import { updateMe } from '@/util/api'
+  import { updateMe, getMe } from '@/util/api'
   import { getLocalStorage } from '@/util/localstorage'
   const token = getLocalStorage('token')
 
   export default {
     name: 'UserProfileView',
-    inject: ['user', 'admin'],
     data () {
       return {
-        user: this.user,
-        admin: this.admin,
+        user: {},
+        admin: '',
       }
     },
 
-    async mounted () {
-      this.$data.user = this.$data.user.value.data
-      this.$data.admin = this.admin.value
+    async beforeMount () {
+      const { data } = await getMe(token)
+      this.user = data
+      this.admin = this.admin.value
       console.log(this.user)
       console.log(this.admin)
     },
