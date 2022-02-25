@@ -43,9 +43,10 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  const token = getLocalStorage()
+  const token = getLocalStorage('token')
   if (to.name !== 'Login' && to.name !== 'Signup') {
-    if (!token) {
+   if (!token) {
+     console.log('Entre')
       return { name: 'Login' }
     }
   }

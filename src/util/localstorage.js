@@ -1,13 +1,13 @@
-const saveLocalStorage = (token) => {
-    window.localStorage.setItem('token', token)
+const saveLocalStorage = ({ key, value }) => {
+    window.localStorage.setItem(key, value)
 }
 
-const getLocalStorage = () => {
-    return window.localStorage.getItem('token')
+const getLocalStorage = (key) => {
+    return window.localStorage.getItem(key)
 }
 
 const removeLocalStorage = () => {
-    window.localStorage.removeItem('token')
+    window.localStorage.clear()
 }
 
 export { getLocalStorage, saveLocalStorage, removeLocalStorage }

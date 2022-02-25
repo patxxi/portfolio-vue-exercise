@@ -54,7 +54,7 @@
         const { data, request } = await postLogin(form)
 
         if (request.ok) {
-          saveLocalStorage(data.access_token)
+          saveLocalStorage({ key: 'token', value: data.access_token })
           this.$router.push({ path: '/' })
         }
       },

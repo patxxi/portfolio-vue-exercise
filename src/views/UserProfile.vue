@@ -128,9 +128,9 @@
 </template>
 
 <script>
-  import { getMe, updateMe } from '@/util/api'
+  import { updateMe } from '@/util/api'
   import { getLocalStorage } from '@/util/localstorage'
-  const token = getLocalStorage()
+  const token = getLocalStorage('token')
 
   export default {
     name: 'UserProfileView',
@@ -138,11 +138,13 @@
     data () {
       return {
         user: this.user,
+        admin: this.admin,
       }
     },
 
-    async beforeMount () {
+    async mounted () {
       this.$data.user = this.$data.user.value.data
+      this.$data.admin = this.admin.value
       console.log(this.user)
       console.log(this.admin)
     },
