@@ -99,4 +99,48 @@ const getAllUsers = async (token) => {
     }
 }
 
-export { postSignup, postLogin, getMe, updateMe, getAllUsers }
+const updateUser = async ({ id, token, body }) => {
+    const url = BASE_URL + `auth/update/${id}`
+    try {
+        const request = await fetch(url, {
+            method: 'POST',
+            body: body,
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+
+        const data = await request.json()
+
+        console.log('data', data)
+        console.log('request', request)
+
+        return { data, request }
+    } catch (e) {
+        return e
+    }
+}
+
+const deleteUser = async ({ id, token }) => {
+    const url = BASE_URL + `auth/destroy/${id}`
+
+    try {
+        const request = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+
+        const data = await request.json()
+
+        console.log('data', data)
+        console.log('request', request)
+
+        return { data, request }
+    } catch (e) {
+        return e
+    }
+}
+
+export { postSignup, postLogin, getMe, updateMe, getAllUsers, updateUser, deleteUser }
