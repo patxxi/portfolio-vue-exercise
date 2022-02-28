@@ -46,10 +46,11 @@
       label="Fecha de Nacimiento"
     />
 
-    <v-text-field
-      v-model="is_admin"
-      label="Admin"
-      type="number"
+    <v-file-input
+      v-model="image"
+      label="Imagen"
+      filled
+      prepend-icon="mdi-camera"
     />
 
     <v-row>
@@ -93,6 +94,7 @@
         repeat_password: '',
         identification_card: '',
         is_admin: 1,
+        image: '',
       }
     },
     methods: {

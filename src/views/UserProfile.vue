@@ -102,18 +102,14 @@
         >
           <app-card class="mt-4 text-center">
             <v-img
-              class="rounded-circle elevation-6 mt-n12 d-inline-block"
-              src="https://demos.creative-tim.com/vue-material-dashboard/img/marc.aba54d65.jpg"
+              class="elevation-6 d-inline-block"
+              :src="'data:image/png;base64,' + user.image"
               width="128"
             />
 
             <v-card-text class="text-center">
-              <h6 class="text-h6 mb-2 text--secondary">
-                CEO / FOUNDER
-              </h6>
-
               <h4 class="text-h4 mb-3 text--primary">
-                John Leider
+                {{ `${user.first_name} ${user.last_name}` }}
               </h4>
 
               <p class="text--secondary">
@@ -166,3 +162,10 @@
 
   }
 </script>
+
+<style scoped>
+.v-image {
+  margin-top: 10px;
+
+}
+</style>

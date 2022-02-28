@@ -50,7 +50,7 @@ router.beforeEach((to, from, next) => {
   if (to.name !== 'Login' && to.name !== 'Signup') {
    if (!token) {
      console.log('Entre')
-      return { name: 'Login' }
+      return '/user/login/'
     }
   }
 
