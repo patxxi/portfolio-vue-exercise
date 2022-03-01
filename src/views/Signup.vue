@@ -35,10 +35,12 @@
     <v-text-field
       v-model="password"
       label="Contraseña"
+      type="password"
     />
     <v-text-field
       v-model="repeat_password"
       label="Repetir Contraseña"
+      type="password"
     />
 
     <v-date-picker

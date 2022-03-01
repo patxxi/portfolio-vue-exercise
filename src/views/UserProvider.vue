@@ -29,8 +29,10 @@
       if (token) {
         this.user.value = { ...await getMe(token) }
         this.admin.value = this.user.value.data.is_admin
+        this.admin.value = this.user.value.data.is_active
 
         saveLocalStorage({ key: 'is_admin', value: this.admin.value })
+        saveLocalStorage({ key: 'is_active', value: this.admin.value })
       }
     },
   }

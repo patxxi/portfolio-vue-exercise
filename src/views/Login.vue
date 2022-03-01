@@ -3,6 +3,7 @@
     id="form"
     v-model="valid"
   >
+    <span v-if="!isActive">El usuario no está activo</span>
     <v-text-field
       v-model="email"
       label="Email"
@@ -11,6 +12,7 @@
     <v-text-field
       v-model="password"
       label="Contraseña"
+      type="password"
     />
 
     <v-row>
@@ -45,6 +47,7 @@
         email: '',
         password: '',
         valid: true,
+        isActive: true,
       }
     },
 
@@ -60,7 +63,13 @@
           const user = request.data
           console.log(user)
           saveLocalStorage({ key: 'is_admin', value: user.is_admin })
-          this.$router.push({ path: '/' })
+          saveLocalStorage({ key: 'is_active', value: user.is_active })
+
+          if (!user.is_active) {
+            this.isActive = false
+          } else {
+            this.$router.push({ path: '/' })
+          }
         }
       },
 
