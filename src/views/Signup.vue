@@ -95,7 +95,6 @@
         password: '',
         repeat_password: '',
         identification_card: '',
-        is_admin: 1,
         image: '',
       }
     },
