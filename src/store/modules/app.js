@@ -20,6 +20,11 @@ const items = [
       icon: 'mdi-clipboard-outline',
       to: '/admin/',
     },
+    {
+      title: 'Add Project',
+      icon: 'mdi-briefcase-plus',
+      to: '/project/new',
+    },
   ]
 
 const state = {
