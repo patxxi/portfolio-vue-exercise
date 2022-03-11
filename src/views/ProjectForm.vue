@@ -31,7 +31,6 @@
       label="Link del video"
     />
 
-
     <div
       :key="tag"
       class="tags-list"

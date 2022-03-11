@@ -58,7 +58,7 @@ const getMe = async (token) => {
 
         return { data, request }
     } catch (e) {
-        return e
+        alert(e)
     }
 }
 
