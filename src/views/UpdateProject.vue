@@ -4,18 +4,18 @@
     v-model="valid"
   >
     <v-text-field
-      v-model="title"
+      v-model="project.title"
       label="Titulo"
     />
 
     <v-select
-      v-model="type"
+      v-model="project.type"
       label="Categoria"
       :items="categories"
     />
 
     <v-select
-      v-model="subtype"
+      v-model="project.subtype"
       label="Sub-Categoria"
       :items="subCategories"
     />
@@ -39,15 +39,8 @@
     </div>
 
     <v-text-field
-      v-model="url"
+      v-model="project.url"
       label="Link del video"
-    />
-
-    <v-file-input
-      v-model="image_1"
-      label="Imagen"
-      filled
-      prepend-icon="mdi-camera"
     />
 
     <v-row justify="center">
@@ -57,39 +50,36 @@
         color="#08a30d"
         @click="handleSubmit"
       >
-        Crear Proyecto
-      </v-btn>
-
-      <v-btn
-        elevation="2"
-        large
-        color="#0320fc"
-      >
-        Registrarse
+        Actualizar Proyecto
       </v-btn>
     </v-row>
   </v-form>
 </template>
 
 <script>
-  import { postProject } from '../util/api'
+  import { updateProject, getProject } from '../util/api'
   import { getLocalStorage } from '../util/localstorage'
   export default {
-    name: 'ProjectForm',
+    name: 'UpdateProject',
 
     data () {
       return {
-        valid: true,
-        type: '',
-        subtype: '',
-        categories: ['Web', 'Aplicacion Escritorio', 'Aplicacion movil', 'Sistema Operativo', 'Inteligencia Artificial'],
-        subCategories: ['Juetos', 'Gadget', 'Blog', 'CRM', 'Ecommerce'],
+        project: {},
         tags: [],
         tag: '',
-        title: '',
-        image_1: [],
-        url: '',
+        valid: true,
+        categories: ['Web', 'Aplicacion Escritorio', 'Aplicacion movil', 'Sistema Operativo', 'Inteligencia Artificial'],
+        subCategories: ['Juetos', 'Gadget', 'Blog', 'CRM', 'Ecommerce'],
       }
+    },
+    async beforeMount () {
+      const { id } = this.$route.params
+      console.log(id)
+      const token = getLocalStorage('token')
+      const { data } = await getProject({ token, id })
+      this.project = data
+      this.tags = [...this.project.tags.map((tag) => tag.name)]
+      console.log(this.project)
     },
     methods: {
       addCategorie () {
@@ -99,21 +89,24 @@
       },
 
       async handleSubmit () {
-        const form = this.$data
-        const formData = new FormData()
+        const { id } = this.$route.params
         const token = getLocalStorage('token')
+        const form = this.project
+        const formData = new FormData()
         delete form.categories
         delete form.subCategories
         delete form.tag
         delete form.valid
+        delete form.image_1
 
         Object.keys(form).forEach(key => {
           formData.append(key, form[key])
         })
 
+        const { data } = await updateProject({ id, token, body: formData })
+        this.project = data
+
         console.log(Object.fromEntries(formData.entries()))
-        const { data } = await postProject({ token, body: formData })
-        console.log(data)
       },
     },
 

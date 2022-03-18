@@ -113,8 +113,13 @@
         })
 
         console.log(Object.fromEntries(formData.entries()))
-        const { data } = await postProject({ token, body: formData })
+        const { data, request } = await postProject({ token, body: formData })
         console.log(data)
+
+        if (request.ok) {
+          console.log('a')
+          this.$router.push('/user/profile')
+        }
       },
     },
 

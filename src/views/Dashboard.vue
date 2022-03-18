@@ -38,24 +38,47 @@
             <v-card-actions>
               <v-spacer />
 
-              <v-btn icon>
+              <v-btn
+                icon
+                @click="handleOpenModal(project.url)"
+              >
                 <v-icon>mdi-video-box</v-icon>
               </v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
+      <app-modal v-if="openModal">
+        <iframe
+          slot="body"
+          class="video"
+          width="100%"
+          height="315"
+          :src="embebedUrl"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        />
+      </app-modal>
     </v-container>
   </div>
 </template>
 
 <script>
   import { getProjects } from '../util/api'
+  import AppModal from '../components/Portal.vue'
   export default {
     name: 'DashboardView',
+    components: {
+      AppModal,
+    },
 
     data: () => ({
       projects: [],
+      openModal: false,
+      embebedUrl: '',
+      youtubeURL: '',
     }),
     async beforeMount () {
       const { data } = await getProjects()
@@ -66,6 +89,20 @@
       filterActiveProjects () {
         return this.projects.filter((project) => project.is_active)
       },
+
+      handleOpenModal (url) {
+        this.openModal = !this.openModal
+        this.youtubeURL = url
+        if (this.openModal) {
+          const youtubeEmbedTemplate = 'https://www.youtube.com/embed/'
+          const videoUrl = this.youtubeURL.split(/(vi\/|v%3D|v=|\/v\/|youtu\.be\/|\/embed\/)/)
+          const YId = undefined !== videoUrl[2] ? videoUrl[2].split(/[^0-9a-z_/\\-]/i)[0] : videoUrl[0]
+          const topOfQueue = youtubeEmbedTemplate.concat(YId)
+          this.embebedUrl = topOfQueue
+          this.youtubeURL = ''
+        }
+      },
+
     },
   }
 </script>
@@ -86,4 +123,9 @@
   font-weight: bolder;
 
 }
+
+.row .col {
+  flex-grow: initial;
+}
+
 </style>

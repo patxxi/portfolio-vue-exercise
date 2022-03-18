@@ -29,6 +29,7 @@ const router = new Router({
       route('Login', null, 'user/login'),
       route('Admin', null, 'admin'),
       route('ProjectForm', null, 'project/new'),
+      route('UpdateProject', null, 'project/update/:id'),
 
       // Components
       route('Notifications', null, 'components/notifications'),

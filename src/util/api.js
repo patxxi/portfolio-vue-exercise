@@ -193,6 +193,22 @@ const getUserProjects = async (token) => {
     }
 }
 
+const getProject = async ({ token, id }) => {
+    const url = BASE_URL + `program/detail/${id}`
+    try {
+        const request = await fetch(url, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        const data = await request.json()
+        console.log(data)
+        return { data, request }
+    } catch (e) {
+        return e
+    }
+}
+
 const deleteProject = async ({ token, id }) => {
     const url = BASE_URL + `program/destroy/${id}`
 
@@ -215,7 +231,7 @@ const deleteProject = async ({ token, id }) => {
     }
 }
 
-const updateProject = async ({ id, token, body }) => {
+const updateProject = async ({ id, body, token }) => {
     const url = BASE_URL + `program/update/${id}/`
     try {
         const request = await fetch(url, {
@@ -250,4 +266,5 @@ export {
     postProject,
     deleteProject,
     updateProject,
+    getProject,
 }

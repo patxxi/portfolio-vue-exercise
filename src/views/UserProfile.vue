@@ -170,7 +170,10 @@
                 <v-icon>mdi-delete-forever</v-icon>
               </v-btn>
 
-              <v-btn icon>
+              <v-btn
+                icon
+                @click="handleUpdateProject(project.id)"
+              >
                 <v-icon>mdi-application-edit</v-icon>
               </v-btn>
             </v-card-actions>
@@ -225,6 +228,10 @@
         await deleteProject({ id, token })
         this.projects = [...this.projects.filter((project) => project.id !== id)]
       },
+
+      handleUpdateProject (id) {
+        this.$router.push(`/project/update/${id}`)
+      },
     },
 
   }
@@ -234,5 +241,9 @@
 .v-image {
   margin-top: 10px;
 
+}
+
+.row .col {
+  flex-grow: initial;
 }
 </style>
