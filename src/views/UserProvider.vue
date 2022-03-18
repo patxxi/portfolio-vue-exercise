@@ -27,6 +27,7 @@
 
     async beforeMount () {
       if (token) {
+        console.log('a')
         this.user.value = { ...await getMe(token) }
         this.admin.value = this.user.value.data.is_admin
 

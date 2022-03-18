@@ -143,4 +143,111 @@ const deleteUser = async ({ id, token }) => {
     }
 }
 
-export { postSignup, postLogin, getMe, updateMe, getAllUsers, updateUser, deleteUser }
+const getProjects = async () => {
+    const url = BASE_URL + 'program/list'
+    try {
+        const request = await fetch(url)
+        const data = await request.json()
+        console.log(data)
+        return { data, request }
+    } catch (e) {
+        return e
+    }
+}
+
+const postProject = async ({ token, body }) => {
+    const url = BASE_URL + 'program/create'
+    try {
+        const request = await fetch(url, {
+            method: 'POST',
+            body: body,
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+
+        const data = await request.json()
+
+        console.log('data', data)
+        console.log('request', request)
+
+        return { data, request }
+    } catch (e) {
+        return e
+    }
+}
+
+const getUserProjects = async (token) => {
+    const url = BASE_URL + 'program/list'
+    try {
+        const request = await fetch(url, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        const data = await request.json()
+        console.log(data)
+        return { data, request }
+    } catch (e) {
+        return e
+    }
+}
+
+const deleteProject = async ({ token, id }) => {
+    const url = BASE_URL + `program/destroy/${id}`
+
+    try {
+        const request = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+
+        const data = await request.json()
+
+        console.log('data', data)
+        console.log('request', request)
+
+        return { data, request }
+    } catch (e) {
+        return e
+    }
+}
+
+const updateProject = async ({ id, token, body }) => {
+    const url = BASE_URL + `program/update/${id}/`
+    try {
+        const request = await fetch(url, {
+            method: 'POST',
+            body: body,
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+
+        const data = await request.json()
+
+        console.log('data', data)
+        console.log('request', request)
+
+        return { data, request }
+    } catch (e) {
+        return e
+    }
+}
+
+export {
+    postSignup,
+    postLogin,
+    getMe,
+    updateMe,
+    getAllUsers,
+    updateUser,
+    deleteUser,
+    getProjects,
+    getUserProjects,
+    postProject,
+    deleteProject,
+    updateProject,
+}

@@ -91,7 +91,6 @@
         url: '',
       }
     },
-
     methods: {
       addCategorie () {
         this.tag = this.tag[0].toUpperCase() + this.tag.slice(1)

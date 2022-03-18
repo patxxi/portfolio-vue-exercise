@@ -120,11 +120,69 @@
         </v-col>
       </v-row>
     </v-container>
+
+    <v-container>
+      <v-row>
+        <v-col
+          v-for="project in projects"
+          :key="project.id"
+        >
+          <v-card
+            width="200px"
+          >
+            <v-img
+              :src="'data:image/png;base64,' + project.image_1"
+              class="white--text align-end card-image"
+              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+              height="200px"
+            >
+              <v-card-title v-text="project.title" />
+            </v-img>
+
+            <v-card-subtitle>
+              {{ project.type }}
+            </v-card-subtitle>
+
+            <v-card-subtitle>
+              {{ project.subtype || "default" }}
+            </v-card-subtitle>
+
+            <v-card-text>
+              <v-chip
+                v-for="tag in project.tags"
+                :key="tag.id"
+              >
+                {{ tag.name }}
+              </v-chip>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer />
+
+              <v-btn icon>
+                <v-icon>mdi-video-box</v-icon>
+              </v-btn>
+
+              <v-btn
+                icon
+                @click="handleDeleteProject(project.id)"
+              >
+                <v-icon>mdi-delete-forever</v-icon>
+              </v-btn>
+
+              <v-btn icon>
+                <v-icon>mdi-application-edit</v-icon>
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
 <script>
-  import { updateMe, getMe } from '@/util/api'
+  import { updateMe, getMe, getUserProjects, deleteProject } from '@/util/api'
   import { getLocalStorage } from '@/util/localstorage'
   const token = getLocalStorage('token')
 
@@ -134,6 +192,7 @@
       return {
         user: {},
         admin: '',
+        projects: [],
       }
     },
 
@@ -141,8 +200,11 @@
       const { data } = await getMe(token)
       this.user = data
       this.admin = this.admin.value
+      this.projects = await getUserProjects(token)
+      this.projects = [...this.projects.data.filter((project) => project.user_id === this.user.id)]
       console.log(this.user)
       console.log(this.admin)
+      console.log(this.projects)
     },
 
     methods: {
@@ -157,6 +219,11 @@
 
         const { data } = await updateMe({ token, body: formData })
         console.log(data)
+      },
+
+      async handleDeleteProject (id) {
+        await deleteProject({ id, token })
+        this.projects = [...this.projects.filter((project) => project.id !== id)]
       },
     },
 
