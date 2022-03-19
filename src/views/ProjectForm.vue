@@ -59,14 +59,6 @@
       >
         Crear Proyecto
       </v-btn>
-
-      <v-btn
-        elevation="2"
-        large
-        color="#0320fc"
-      >
-        Registrarse
-      </v-btn>
     </v-row>
   </v-form>
 </template>
