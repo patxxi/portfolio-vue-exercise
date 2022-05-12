@@ -1,14 +1,12 @@
 <template>
-  <div>
+  <div class="hero">
     <v-container>
       <v-row>
         <v-col
           v-for="project in filterActiveProjects()"
           :key="project.id"
         >
-          <v-card
-            width="200px"
-          >
+          <v-card>
             <v-img
               :src="'data:image/png;base64,' + project.image_1"
               class="white--text align-end card-image"
@@ -62,6 +60,23 @@
         />
       </app-modal>
     </v-container>
+    <div class="banner">
+      <v-col
+        class="v-image__container"
+      >
+        <v-img
+          src="../assets/banner.png"
+        />
+      </v-col>
+      <v-col
+
+        class="v-image__container"
+      >
+        <v-img
+          src="../assets/banner_2.jpg"
+        />
+      </v-col>
+    </div>
   </div>
 </template>
 
@@ -108,10 +123,32 @@
 </script>
 
 <style scoped>
+
+.hero {
+  display: flex;
+  width: 100%;
+}
 .v-card__title {
   font-size: 16px;
 }
 
+.v-card {
+  height: 400px;
+  width: 200px;
+  margin: 20px 5px;
+}
+
+.banner {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.banner .v-img__container {
+  width: 100%;
+  height: 100%;
+}
 .v-card .v-card__subtitle {
   color: black;
   font-weight: bolder;
@@ -122,6 +159,9 @@
   color: black;
   font-weight: bolder;
 
+}
+.container .hero .container {
+  width: 100%;
 }
 
 .row .col {

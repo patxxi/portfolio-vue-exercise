@@ -8,7 +8,7 @@ const items = [
     {
       title: 'Dashboard',
       icon: 'mdi-view-dashboard',
-      to: '/',
+      to: '/dashboard',
     },
     {
       title: 'User Profile',
