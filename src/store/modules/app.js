@@ -8,10 +8,10 @@ const items = [
     {
       title: 'Dashboard',
       icon: 'mdi-view-dashboard',
-      to: '/dashboard',
+      to: '/',
     },
     {
-      title: 'User Profile',
+      title: 'Perfil de usuario',
       icon: 'mdi-account',
       to: '/user/profile/',
     },
@@ -21,9 +21,14 @@ const items = [
       to: '/admin/',
     },
     {
-      title: 'Add Project',
+      title: 'Agregar proyecto',
       icon: 'mdi-briefcase-plus',
       to: '/project/new',
+    },
+    {
+      title: 'Planes',
+      icon: 'mdi-clipboard-text',
+      to: '/plan/',
     },
   ]
 

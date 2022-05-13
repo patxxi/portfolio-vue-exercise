@@ -70,5 +70,6 @@ export function route (name, component, path = '') {
     name,
     components,
     path,
+    props: true,
   }
 }

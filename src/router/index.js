@@ -30,6 +30,8 @@ const router = new Router({
       route('Admin', null, 'admin'),
       route('ProjectForm', null, 'project/new'),
       route('UpdateProject', null, 'project/update/:id'),
+      route('Plans', null, 'plan'),
+      route('Payment', null, 'payment/:plan'),
 
       // Components
       route('Notifications', null, 'components/notifications'),
@@ -49,7 +51,7 @@ router.beforeEach((to, from, next) => {
   const token = getLocalStorage('token')
   const admin = parseInt(getLocalStorage('is_admin'))
   console.log('admin', admin)
-  if (to.name !== 'Login' && to.name !== 'Signup' && to.name !== 'Dashboard') {
+  if (to.name !== 'Login' && to.name !== 'Signup' && to.name !== 'Dashboard' && to.name !== 'Plans' && to.name !== 'Payment') {
    if (!token) {
      console.log('Entre')
       return '/user/login/'
