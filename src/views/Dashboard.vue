@@ -77,16 +77,25 @@
         />
       </v-col>
     </div>
+
+    <vue-whatsapp-widget
+      phone-number="+584244116118"
+      text-reply="Normalmente responde en menos de una hora"
+      :messages="message"
+      company-name="Topicos Web"
+    />
   </div>
 </template>
 
 <script>
   import { getProjects } from '../util/api'
   import AppModal from '../components/Portal.vue'
+  import VueWhatsappWidget from 'vue-whatsapp-widget'
   export default {
     name: 'DashboardView',
     components: {
       AppModal,
+      VueWhatsappWidget,
     },
 
     data: () => ({
@@ -94,6 +103,7 @@
       openModal: false,
       embebedUrl: '',
       youtubeURL: '',
+      message: ['Hola, quieres saber mas de mi trabajo'],
     }),
     async beforeMount () {
       const { data } = await getProjects()
@@ -162,6 +172,13 @@
 }
 .container .hero .container {
   width: 100%;
+}
+
+.v-whatsapp {
+  width: 40px;
+  position: relative;
+  bottom: 40px;
+  right: 25px;
 }
 
 .row .col {
