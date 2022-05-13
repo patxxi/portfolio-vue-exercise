@@ -1,14 +1,11 @@
 <template>
-  <div class="modal-backdrop">
-    <div class="modal">
-      <slot name="body" />
-    </div>
-  </div>
+<h1>a</h1>
 </template>
 
 <script>
   export default {
     name: 'AppModal',
+    props: ['dialog'],
 
   }
 </script>

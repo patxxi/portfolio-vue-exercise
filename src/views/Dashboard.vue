@@ -46,19 +46,31 @@
           </v-card>
         </v-col>
       </v-row>
-      <app-modal v-if="openModal">
-        <iframe
-          slot="body"
-          class="video"
-          width="100%"
-          height="315"
-          :src="embebedUrl"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        />
-      </app-modal>
+      <v-row justify="center">
+        <v-dialog
+          v-model="openModal"
+          fullscreen
+          hide-overlay
+          transition="dialog-bottom-transition"
+        >
+          <iframe
+            class="video"
+            width="50%"
+            height="80%"
+            :src="embebedUrl"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          />
+          <v-btn
+            color="primary"
+            @click="openModal = false"
+          >
+            Cerrar
+          </v-btn>
+        </v-dialog>
+      </v-row>
     </v-container>
     <div class="banner">
       <v-col
